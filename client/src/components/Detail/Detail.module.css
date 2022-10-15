@@ -1,0 +1,27 @@
+.principal {
+  display: flex;
+  justify-content: center;
+  background-color: #dcdada;
+}
+
+.carta {
+  background-color: #f0e9e9;
+  width: auto;
+  border: solid black 1px;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+
+}
+
+.cartas {
+
+  display: flex;
+  flex-wrap: wrap;
+  width: auto;
+
+}

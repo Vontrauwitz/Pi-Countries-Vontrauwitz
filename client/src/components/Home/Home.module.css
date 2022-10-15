@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.divPrincipal {
+  background-color: #dcdada;
+  background-image: url(../../assets/img/watercolor-4117017.png);
+  height: 140vh;
+  font-family: sans-serif;
+}
+
+.cardContainer {
+  justify-content: space-evenly;
+  /* display: grid;
+  gap: 50px 350px;
+  grid-template-columns: auto auto auto; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.divTitulo {
+  /* background-color: aqua; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 20px;
+  padding: 10px
+}
+
+.divFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 5px;
+}
+
+.paginated {
+
+  /* background-color: aqua; */
+  margin: 5px;
+}
+
+.box {
+  /* position: absolute; */
+  /* top: 50%;
+  left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.box select {
+  /* background-color: #0563af; */
+  color: rgb(72, 71, 71);
+  padding: 5px;
+  width: 250px;
+  border: none;
+  font-size: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+/* .box::before {
+  content: "\f13a";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+} */
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+  padding: 30px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(61, 60, 60)
+}
+
+.buttonTitulo {
+
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.buttonTitulo:hover {
+  text-decoration: none;
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+button:active {
+  transform: translateY(-1px);
+}

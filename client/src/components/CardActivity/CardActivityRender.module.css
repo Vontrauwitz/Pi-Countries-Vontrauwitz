@@ -1,0 +1,16 @@
+.fondo {
+  background-image: url(../../assets/img/watercolor-4117017.png);
+  background-color: #dcdada;
+}
+
+.cardContainer {
+
+
+
+  /* display: grid;
+  gap: 50px 350px;
+  grid-template-columns: auto auto auto; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
