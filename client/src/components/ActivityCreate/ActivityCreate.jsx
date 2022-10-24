@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { postActivity, getCountries, getActivity } from '../../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './ActivityCreate.module.css'
+import londonBus from '../../assets/img/londonbus.png'
+import helloWorld from '../../assets/img/helloworld.gif'
 
 
 
@@ -14,6 +16,7 @@ export function ActivityCreate() {
   const history = useHistory();
 
   const countries = useSelector((state) => state.countries)
+  const activities = useSelector((state) => state.activities)
 
 
   // const activitiesSeason = useSelector((state) => state.activities)
@@ -36,7 +39,9 @@ export function ActivityCreate() {
 
   function validate(input) {
     let errors = {};
-    if (!input.name) {
+    if (activities.find(el => el.name === input.name)) {
+      errors.name = alert('The country already exists!')
+    } else if (!input.name) {
       errors.name = "The ACTIVITY name is required";
     } else if (!input.name.match(/^[a-zA-Z\s]*$/)) {
       errors.name = "The ACTIVITY name must not have symbols"
@@ -55,7 +60,9 @@ export function ActivityCreate() {
     else if (input.duration < 1 || input.duration > 24) {
       errors.duration = " The ACTIVITY time must be between 1 hours and 24 hours"
     }
-
+    if (input.season === !"Spring" || input.season === !"Summer" || input.season === !"Fall" || input.season === !"Winter") {
+      errors.season = "the ACTIVITY season must be selected"
+    }
 
 
 
@@ -129,69 +136,111 @@ export function ActivityCreate() {
     dispatch(getCountries());
   }, [dispatch]);
 
+
   return (
-    <div className={styles.caja}>
-      <div>
+
+    <div className={styles.container}>
+      {/* //?===================================================================== */}
+      {/* //? navbar */}
+
+      <div className={styles.navBar}>
+        <img className={styles.logo} src={helloWorld} alt='holaMundo' />
         <Link to='/home'>
-          <button>Go Back</button>
+          <button className={styles.buttonSubmit} >Go Back</button>
         </Link>
         <h1>Create your activities</h1>
       </div>
-      <div>
+
+      {/* //?===================================================================== */}
+      {/* //? footer */}
+
+      <div className={styles.footer}>Aqui va un footer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+
+      {/* //?===================================================================== */}
+      {/* //? countries */}
+
+      <div className={styles.countries}>
+        <div className={styles.contenedorCon}>
+          {input.country.map(con =>
+            <div className={styles.country}>
+              <p>{con}</p>
+              <button className={styles.X} onClick={() => handleDelete(con)}>
+                X
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+      {/*//? ===============================================================  */}
+      {/* //? image */}
+
+      <img className={styles.titleImage} src={londonBus} alt='tittleimg1' />
+      {/*//? ===============================================================  */}
+      {/* //? form  (general) */}
+
+      <div className={styles.form}>
         <form onSubmit={handleSubmit}>
 
 
-          <div>
-            <label>Activity name:</label>
-            <br />
-            <br />
-            <input
-              className={styles.box}
-              type="text"
-              value={input.name}
-              name="name"
-              onChange={handleChange}
-            />
-            {errors.name && (
-              <p className={styles.error}>{errors.name}</p>
-            )}
-          </div>
-          <br />
+          <div className={styles.containerForm}>
 
-          <div>
-            <label>Difficulty level:</label>
-            <br />
-            <br />
-            <input
-              type="number"
-              value={input.difficulty}
-              name="difficulty"
-              onChange={handleChange}
-            />
-            {errors.difficulty && (
-              <p className={styles.error}>{errors.difficulty}</p>
-            )}
-          </div>
-          <br />
+            {/*//? ===============================================================  */}
+            {/* //? form  (left) */}
 
-          <div>
-            <label>Duration level:</label>
-            <br />
-            <br />
+            <div className={styles.leftForm}>
+              <div className={styles.name}>
+                <label>Activity name:</label>
 
-            <input
-              type="number"
-              value={input.duration}
-              name="duration"
-              onChange={handleChange}
-            />
-            {errors.duration && (
-              <p className={styles.error}>{errors.duration}</p>
-            )}
-          </div>
-          <br />
+                <input
+                  className={styles.select2}
+                  type="text"
+                  value={input.name}
+                  name="name"
+                  onChange={handleChange}
+                />
+                {errors.name && (
+                  <p className={styles.error}>{errors.name}</p>
+                )}
+              </div>
 
-          {/* <div>
+
+              <div className={styles.difficulty}>
+                <label>Difficulty level:</label>
+
+                <input
+                  className={styles.select2}
+                  type="number"
+                  value={input.difficulty}
+                  name="difficulty"
+                  onChange={handleChange}
+                />
+                {errors.difficulty && (
+                  <p className={styles.error}>{errors.difficulty}</p>
+                )}
+              </div>
+
+
+              <div className={styles.duration}>
+                <label>Duration level:</label>
+
+                <input
+                  className={styles.select2}
+                  type="number"
+                  value={input.duration}
+                  name="duration"
+                  onChange={handleChange}
+                />
+                {errors.duration && (
+                  <p className={styles.error}>{errors.duration}</p>
+                )}
+              </div>
+            </div>
+
+            {/*//? ===============================================================  */}
+            {/* //? form  (right) */}
+
+            <div className={styles.rightForm}>
+              {/* <div>
             <label>Activity season:</label>
             <br />
             <input
@@ -203,74 +252,57 @@ export function ActivityCreate() {
           </div> */}
 
 
-          <div className={styles.box}>
-            <label>Season:</label>
-            <br />
-
-            <select defaultValue={"DEFAULT"} onChange={e => handleSeason(e)}>
-              <option value="DEFAULT" disabled>Season</option>
-              <option name='Spring' value='Spring'>Spring</option>
-              <option name='Summer' value='Summer'>Summer</option>
-              <option name='Fall' value='Fall'>Fall</option>
-              <option name='Winter' value='Winter'>Winter</option>
-
-            </select>
-
-
-          </div>
-          <br />
-
-
-          <div>
-            <label>Activity image:</label>
-            <br />
-            <input
-              type="text"
-              value={input.image}
-              name="image"
-              onChange={handleChange}
-            />
-          </div>
-          <br />
+              <div className={styles.season}>
+                <label>Season: </label>
+                <select className={styles.select2} defaultValue={"DEFAULT"} onChange={e => handleSeason(e)}>
+                  <option value="DEFAULT" disabled> Select a Season:</option>
+                  <option name='Spring' value='Spring'>Spring</option>
+                  <option name='Summer' value='Summer'>Summer</option>
+                  <option name='Fall' value='Fall'>Fall</option>
+                  <option name='Winter' value='Winter'>Winter</option>
+                </select>
+              </div>
 
 
 
-          <div className={styles.box}>
-            <label>Country name:</label>
-            <br />
-            <select defaultValue={"DEFAULT"} onChange={(n) => handleSelect(n)}>
-              <option value="DEFAULT" disabled >Add countries</option>
-              {countries.map((con) => (
+              <div className={styles.actImage}>
+                <label>Activity image:     </label>
+                <input
+                  className={styles.select2}
+                  type="text"
+                  value={input.image}
+                  name="image"
+                  onChange={handleChange}
+                />
+              </div>
 
-                <option value={con.name}>{con.name}</option>
 
-              ))}
+              <div className={styles.countrySelect}>
+                <label>Country name:</label>
+                <br />
+                <select className={styles.select} defaultValue={"DEFAULT"} onChange={(n) => handleSelect(n)}>
+                  <option value="DEFAULT" disabled >Add countries</option>
+                  {countries.map((con) => (
 
-            </select>
+                    <option value={con.name}>{con.name}</option>
 
+                  ))}
+
+                </select>
+
+              </div>
+            </div>
           </div>
 
-          <button type='submit' >Create</button>
 
+          <div className={styles.submit}>
+            <button className={styles.buttonSubmit}  >Create</button>
+          </div>
 
         </form>
-        <br />
-        <br />
-
-
-        <div className={styles.contenedorCon}>
-          {input.country.map(con =>
-            <div className={styles.country}>
-              <p>{con}</p>
-              <button className={styles.X} onClick={() => handleDelete(con)}>
-                X
-              </button>
-            </div>
-          )}
-        </div>
-
       </div>
     </div>
+
   )
 
 }

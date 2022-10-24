@@ -1,0 +1,65 @@
+* {
+  margin: 0%;
+}
+
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.4fr 1.6fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "navBar navBar navBar"
+    "image image image"
+    "image image image"
+    "image image image"
+    "image image image";
+}
+
+.image {
+  background-color: #1c3b4b;
+  grid-area: image;
+  display: flex;
+  align-content: center;
+  justify-content: left;
+}
+
+.navBar {
+  grid-area: navBar;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: end;
+  background-color: #1c3b4b;
+}
+
+.btn {
+  text-decoration: none;
+  padding: .5em .5em;
+  margin-left: 5px;
+  margin-right: 100px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: #23c483;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+button:active {
+  transform: translateY(-1px);
+}

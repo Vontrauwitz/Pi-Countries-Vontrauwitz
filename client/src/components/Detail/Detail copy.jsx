@@ -19,6 +19,36 @@ export default function Detail(props) {
 
   const myActivity = useSelector((state) => state.detail)
 
+
+
+  // < div className = { styles.activities } >
+  //   <div className={styles.cartas}>
+  //     {myActivity.activities.map(n =>
+  //       <div className={styles.carta}>
+  //         <br />
+  //         <h2 >{n.name}</h2>
+  //         <br />
+  //         <p>Dificulty: {n.difficulty}</p>
+  //         <br />
+  //         <p>Duration: {n.duration}</p>
+  //         <br />
+  //         <p>Season: {n.season}</p>
+  //         <br />
+
+  //       </div>
+  //     )}
+  //   </div>
+  //         </ >
+
+
+
+
+
+
+
+
+
+
   return (
 
     <div className={styles.container}>    {/* //! */}
@@ -32,16 +62,16 @@ export default function Detail(props) {
 
       </div>
 
+      <div className={styles.image}>
+        <img className={styles.image} src={myActivity.images} alt='countries' /> {/* //? cambio a imagen secundaria, revisar */}
+        <br />
+      </div>
 
 
 
       {
         myActivity.length !== 0 ?
-          <div className={styles.content}>
-            <div className={styles.image}>
-              <img className={styles.image} src={myActivity.images} alt='countries' /> {/* //? cambio a imagen secundaria, revisar */}
-              <br />
-            </div>
+          <div >
             <div className={styles.details}>
               <h1>{myActivity.name}</h1>
               <br />
@@ -67,9 +97,8 @@ export default function Detail(props) {
               </p>
               <br />
             </div>
-
-
-
+            {/* //!===================================================== */}
+            {/* //? ACTIVITY */}
             <div className={styles.activities}>
               <div className={styles.cartas}>
                 {myActivity.activities.map(n =>
@@ -89,7 +118,7 @@ export default function Detail(props) {
               </div>
             </div>
 
-
+            {/* //!================================================== */}
 
           </div> : <p>Loading......</p>
       }

@@ -5,7 +5,7 @@ import { getCountriesName } from '../../actions'
 import styles from './SearchBar.module.css'
 
 
-export default function SearchBar() {
+export default function SearchBar() {  //{setcurrentpage}
 
   const dispatch = useDispatch()
 
@@ -13,12 +13,13 @@ export default function SearchBar() {
 
   //logica
 
+
   function handleInputChange(n) {
     n.preventDefault()
-
     setName(n.target.value)
+    // dispatch(getCountriesName(name))
 
-    console.log(name);
+
   }
 
   function handleSubmit(n) {
@@ -33,6 +34,16 @@ export default function SearchBar() {
     }
   }
 
+  // function handleSubmit(n) {
+
+  // } if (name.length === 0) {
+  //   alert('No countries foundd')
+  // } else {
+  //   dispatch(getCountriesName(name))
+  //   setCurrentPage(1)
+  //   setName("")
+  // }
+
 
   return (
     //agregamos la logica del renderizado
@@ -41,7 +52,6 @@ export default function SearchBar() {
         className={styles.input}
         type='text'
 
-        placeholder='Search Countries...'
 
         onChange={(n) => handleInputChange(n)}
       />

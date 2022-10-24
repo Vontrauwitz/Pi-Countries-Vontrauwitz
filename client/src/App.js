@@ -1,11 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { LandingPage } from "./components/LandingPage/LandingPage.jsx"
+import LandingPage from "./components/LandingPage/LandingPage.jsx"
 import Home from './components/Home/Home';
 import { ActivityCreate } from './components/ActivityCreate/ActivityCreate';
 import CardActivityRender from './components/CardActivity/CardActivityRender';
 import Detail from './components/Detail/Detail';
-import PruebaCss from './components/PruebaCss/pruebaCss.jsx';
+import PruebaCss from './components/PruebaCss/pruebaCss.jsx'; //! borrar son pruebas
+import pruebaCss2 from './components/PruebaCss/PruebaCss2.jsx'; //! borrar son pruebas
 
 function App() {
   return (
@@ -17,9 +18,8 @@ function App() {
           <Route path="/Activity" component={ActivityCreate} />
           <Route path="/home/:id" component={Detail} />
           <Route path="/CardActivityRender" component={CardActivityRender} />
-          <Route path="/PruebaCss" component={PruebaCss} />
-
-
+          <Route exact path="/PruebaCss" component={PruebaCss} />
+          <Route exact path="/PruebaCss2" component={pruebaCss2} />
         </Switch>
       </div>
     </BrowserRouter>

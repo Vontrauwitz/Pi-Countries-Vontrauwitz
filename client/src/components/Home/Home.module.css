@@ -1,23 +1,82 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
+/* 
 .divPrincipal {
   background-color: #dcdada;
   background-image: url(../../assets/img/watercolor-4117017.png);
   height: 140vh;
   font-family: sans-serif;
+} */
+
+.container {
+  font-family: sans-serif;
+  background-image: url(../../assets/img/watercolor-4117017.png);
+  background-color: #bebebe;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 1fr;
+  grid-template-rows: 0.4fr 0.5fr 2.1fr 2.7fr 0.2fr 0.2fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "navBar navBar navBar"
+    "filters filters filters"
+    "main main main"
+    "main main main"
+    "paginated paginated paginated"
+    "footer footer footer";
 }
 
-.cardContainer {
+.navBar {
+  grid-area: navBar;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-  /* display: grid;
-  gap: 50px 350px;
-  grid-template-columns: auto auto auto; */
+  align-items: center;
+  margin: 5px;
+}
+
+.logo {
+  width: 100px;
+  border-radius: 30px;
+}
+
+.filters {
+  grid-area: filters;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 5px;
+}
+
+.main {
+  grid-area: main;
+  justify-content: space-evenly;
   display: flex;
   flex-wrap: wrap;
 }
+
+.paginated {
+  grid-area: paginated;
+  margin: 5px;
+}
+
+.footer {
+  grid-area: footer;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+}
+
+
+
+
+
+
+
+
+
+
 
 .divTitulo {
   /* background-color: aqua; */
@@ -35,11 +94,7 @@
   margin: 5px;
 }
 
-.paginated {
 
-  /* background-color: aqua; */
-  margin: 5px;
-}
 
 .box {
   /* position: absolute; */
@@ -97,7 +152,7 @@ a:hover {
 
 .buttonTitulo {
 
-  padding: 1.3em 3em;
+  padding: .8em .6em;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2.5px;

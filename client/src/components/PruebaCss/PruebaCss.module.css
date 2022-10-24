@@ -1,28 +1,36 @@
-* {
-  margin: 0
-}
-
 .container {
-
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  background-image: url('../../assets/img/watercolor-4117017.png');
-  height: 100vh;
-  background-size: cover;
-  position: relative;
-
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.4fr 1.6fr 1fr 1fr 1fr 1fr 1.8fr 0.2fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "navBar navBar navBar navBar navBar navBar"
+    "image image image details details details"
+    "image image image details details details"
+    "image image image details details details"
+    "image image image details details details"
+    "activities activities activities activities activities activities"
+    "activities activities activities activities activities activities"
+    "footer footer footer footer footer footer";
 }
 
-
-.uno {
-  background: linear-gradient(rgba(255, 0, 0, 0.459), rgba(0, 0, 255, 0.415));
-  display: flex;
-  place-items: center;
-  text-align: center;
-  justify-content: center;
+.navBar {
+  grid-area: navBar;
+  background-color: aqua;
 }
 
-.dos {
-  background-size: 500%;
+.image {
+  grid-area: image;
+}
 
+.details {
+  grid-area: details;
+}
+
+.activities {
+  grid-area: activities;
+}
+
+.footer {
+  grid-area: footer;
 }

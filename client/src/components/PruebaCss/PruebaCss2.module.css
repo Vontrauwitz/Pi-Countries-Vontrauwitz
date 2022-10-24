@@ -1,0 +1,42 @@
+.container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1.2fr 0.8fr 1fr;
+  grid-template-rows: 0.4fr 1.6fr 1fr 0.9fr 1.7fr 0.4fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "navBar navBar navBar"
+    "titleImage formulario formulario"
+    "titleImage formulario formulario"
+    "titleImage formulario formulario"
+    "activities activities activities"
+    "footer footer footer";
+}
+
+.navBar {
+  grid-area: navBar;
+  background-color: aqua;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.footer {
+  grid-area: footer;
+  background-color: aqua
+}
+
+.activities {
+  grid-area: activities;
+  background-color: brown
+}
+
+.titleImage {
+  grid-area: titleImage;
+  background-color: blueviolet
+}
+
+.form {
+  grid-area: formulario;
+  background-color: blue
+}

@@ -3,7 +3,7 @@ import styles from './Card.module.css'
 
 //? all countries  * 1 * de aqui se va a renderizar el componente card a home
 
-export default function Card({ name, image, continent }) {
+export default function Card({ name, image, continent, capital }) {
   return (
     <div className={styles.card}>
       <div className={styles.cardImage}>
@@ -12,7 +12,7 @@ export default function Card({ name, image, continent }) {
       <div className={styles.cardDescription}>
         <h1 className={styles.textTitle}> {name} </h1>
         <div>
-          <h3 className={styles.textBody}>  Continent: </h3>
+          <h3 className={styles.textBody}>{capital}</h3>
 
           <h2>
             <p className={styles.types}>

@@ -9,10 +9,7 @@ module.exports = sequelize => {
       type: DataTypes.STRING(3),
       primaryKey: true,
       allowNull: false,
-      // get(){
-      //   let value = this.getDataValue('code');
-      //   return value ? `API-${value}`: null;
-      // }
+
     },
     name: {
       type: DataTypes.STRING,
@@ -21,10 +18,12 @@ module.exports = sequelize => {
     image: {
       type: DataTypes.TEXT,
       allowNull: false,
-      // get() {
-      //   let value = this.getDataValue('image');
-      //   return value.split('|;|');
-      // }
+
+    },
+    images: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+
     },
     continent: {
       type: DataTypes.STRING,
@@ -44,14 +43,29 @@ module.exports = sequelize => {
       type: DataTypes.INTEGER
     },
     maps: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    map: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     timezones: {
       type: DataTypes.STRING,
-      // get() {
-      //   let value = this.getDataValue('timezones');
-      //   return value.split('|;|');
-      // }
+      allowNull: true,
+
+    },
+    languages: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    borders: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    currencies: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   });
 };

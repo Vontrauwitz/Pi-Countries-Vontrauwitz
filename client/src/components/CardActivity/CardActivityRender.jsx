@@ -5,6 +5,7 @@ import { getActivity, } from '../../actions/index.js'; //? me importo las ACTION
 import { CardActivity } from './CardActivity.jsx';
 import { Link } from 'react-router-dom';
 import styles from './CardActivityRender.module.css'
+import helloWorld from '../../assets/img/helloworld.gif'
 
 export default function CardActivityRender() {
 
@@ -17,14 +18,17 @@ export default function CardActivityRender() {
   console.log(activityState);
 
   return (
-    <div className={styles.fondo}>
-      <div>
+    <div className={styles.container}>
+      <div className={styles.navBar}>
+        <img className={styles.logo} src={helloWorld} alt='holaMundo' />
         <Link to='/home'>
           <button>Go Back</button>
         </Link>
         <h1>Your Activities</h1>
       </div>
-      <div className={styles.cardContainer}>
+
+
+      <div className={styles.main}>
         {activityState?.map(e => {
           return (
             <div >
@@ -45,6 +49,9 @@ export default function CardActivityRender() {
             </div>)
         })}
       </div>
+
+      <div className={styles.footer}>Aqui va un footer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+
     </div>
   )
 } 
