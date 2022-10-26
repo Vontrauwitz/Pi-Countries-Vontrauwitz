@@ -22,7 +22,10 @@ export default function CardActivityRender() {
       <div className={styles.navBar}>
         <img className={styles.logo} src={helloWorld} alt='holaMundo' />
         <Link to='/home'>
-          <button>Go Back</button>
+          <button className={styles.buttonTitulo}>Home</button>
+        </Link>
+        <Link to='/Activity'>
+          <button className={styles.buttonTitulo}>Create Activities</button>
         </Link>
         <h1>Your Activities</h1>
       </div>
@@ -50,7 +53,7 @@ export default function CardActivityRender() {
         })}
       </div>
 
-      <div className={styles.footer}>Aqui va un footer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+      <div className={styles.footer}>PI-Countries SoyHenry Vontrauwitz 2022</div>
 
     </div>
   )

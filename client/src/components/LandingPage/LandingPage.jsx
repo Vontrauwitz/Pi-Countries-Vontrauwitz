@@ -12,14 +12,21 @@ export default function LandingPage() {
         <Link to='/home'>
           <button className={styles.btn}>Home</button>
         </Link>
-        <Link >
+        <Link to='/About'>
           <button className={styles.btn}>About</button>
         </Link>
       </div>
 
 
       <div className={styles.image}>
-        <img src={helloWorld} alt='holamundo' />
+        <div>
+          <img className={styles.image1} src={helloWorld} alt='holamundo' />
+        </div>
+        <div className={styles.animatecharcter}>
+          PI- COUNTRIES
+
+          WELCOME
+        </div>
 
       </div>
 

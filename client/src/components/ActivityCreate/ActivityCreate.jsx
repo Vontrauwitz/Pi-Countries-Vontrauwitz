@@ -27,11 +27,12 @@ export function ActivityCreate() {
 
   const [input, setInput] = useState({
     name: '',
-    difficulty: '0',
-    duration: '0',
+    difficulty: '',
+    duration: '',
     season: '',
     image: '',
     country: []
+
   })
 
   //*=========================================================================
@@ -39,15 +40,15 @@ export function ActivityCreate() {
 
   function validate(input) {
     let errors = {};
-    if (activities.find(el => el.name === input.name)) {
-      errors.name = alert('The country already exists!')
+    if (activities.find(el => el.name.toLowerCase() === input.name.toLowerCase())) {
+      errors.name = alert('The activity already exists!')
     } else if (!input.name) {
       errors.name = "The ACTIVITY name is required";
-    } else if (!input.name.match(/^[a-zA-Z\s]*$/)) {
+    } else if (/[^A-Za-z0-9 ]+/g.test(input.name)) {
       errors.name = "The ACTIVITY name must not have symbols"
     }
     if (!input.difficulty) {
-      errors.duration = "difficulty is required"
+      errors.difficulty = "difficulty is required"
     }
 
     else if (input.difficulty < 1 || input.difficulty > 5) {
@@ -60,14 +61,14 @@ export function ActivityCreate() {
     else if (input.duration < 1 || input.duration > 24) {
       errors.duration = " The ACTIVITY time must be between 1 hours and 24 hours"
     }
-    if (input.season === !"Spring" || input.season === !"Summer" || input.season === !"Fall" || input.season === !"Winter") {
+    if (!input.season || input.season === "DEFAULT") {
       errors.season = "the ACTIVITY season must be selected"
     }
 
 
 
-    if (!input.countries || input.countries.length === 0) {
-      errors.countries = "At least one country must be selected"
+    if (!input.country || input.country.length === 0) {
+      errors.country = "At least one country must be selected"
     }
     return errors;
   }
@@ -105,22 +106,35 @@ export function ActivityCreate() {
       ...input,
       season: n.target.value
     })
+    setErrors(
+      validate({
+        ...input,
+        season: n.target.value,
+      })
+    );
   }
 
   function handleSubmit(n) {
     n.preventDefault();
-    console.log(input);
-    dispatch(postActivity(input))
-    setInput({
-      name: '',
-      difficulty: '',
-      duration: '',
-      season: "",
-      image: '',
-      country: []
-    })
-    history.push('/home')
+    if (!input.name.trim()) {
+      alert('The name is required')
+    }
+    else if (input.country.length === 0) {
+      alert('Must select a country')
+    } else {
+      dispatch(postActivity(input))
+      setInput({
+        name: '',
+        difficulty: '0',
+        duration: '0',
+        season: '',
+        image: '',
+        country: []
+      })
+      history.push('/CardActivityRender')
+    }
   }
+
 
   function handleDelete(n) {
     setInput({
@@ -146,7 +160,10 @@ export function ActivityCreate() {
       <div className={styles.navBar}>
         <img className={styles.logo} src={helloWorld} alt='holaMundo' />
         <Link to='/home'>
-          <button className={styles.buttonSubmit} >Go Back</button>
+          <button className={styles.buttonSubmit} >Home</button>
+        </Link>
+        <Link to='/CardActivityRender'>
+          <button className={styles.buttonSubmit} >View Activities</button>
         </Link>
         <h1>Create your activities</h1>
       </div>
@@ -154,7 +171,7 @@ export function ActivityCreate() {
       {/* //?===================================================================== */}
       {/* //? footer */}
 
-      <div className={styles.footer}>Aqui va un footer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+      <div className={styles.footer}>PI-Countries SoyHenry Vontrauwitz 2022</div>
 
       {/* //?===================================================================== */}
       {/* //? countries */}
@@ -175,6 +192,8 @@ export function ActivityCreate() {
       {/* //? image */}
 
       <img className={styles.titleImage} src={londonBus} alt='tittleimg1' />
+
+
       {/*//? ===============================================================  */}
       {/* //? form  (general) */}
 
@@ -192,7 +211,7 @@ export function ActivityCreate() {
                 <label>Activity name:</label>
 
                 <input
-                  className={styles.select2}
+                  className={styles.input}
                   type="text"
                   value={input.name}
                   name="name"
@@ -208,7 +227,7 @@ export function ActivityCreate() {
                 <label>Difficulty level:</label>
 
                 <input
-                  className={styles.select2}
+                  className={styles.input}
                   type="number"
                   value={input.difficulty}
                   name="difficulty"
@@ -224,7 +243,7 @@ export function ActivityCreate() {
                 <label>Duration level:</label>
 
                 <input
-                  className={styles.select2}
+                  className={styles.input}
                   type="number"
                   value={input.duration}
                   name="duration"
@@ -240,35 +259,40 @@ export function ActivityCreate() {
             {/* //? form  (right) */}
 
             <div className={styles.rightForm}>
-              {/* <div>
-            <label>Activity season:</label>
-            <br />
-            <input
-              type="text"
-              value={input.season}
-              name="season"
-              onChange={handleChange}
-            />
-          </div> */}
 
 
-              <div className={styles.season}>
-                <label>Season: </label>
-                <select className={styles.select2} defaultValue={"DEFAULT"} onChange={e => handleSeason(e)}>
-                  <option value="DEFAULT" disabled> Select a Season:</option>
-                  <option name='Spring' value='Spring'>Spring</option>
-                  <option name='Summer' value='Summer'>Summer</option>
-                  <option name='Fall' value='Fall'>Fall</option>
-                  <option name='Winter' value='Winter'>Winter</option>
-                </select>
-              </div>
-
+              <select
+                defaultValue={"DEFAULT"}
+                name="season"
+                id="season"
+                onChange={(e) => handleSeason(e)}
+              >
+                <option value="DEFAULT" disabled>
+                  Select Season
+                </option>
+                <option value="Summer">
+                  Summer
+                </option>
+                <option value="Winter" >
+                  Winter
+                </option>
+                <option value="Spring">
+                  Spring
+                </option>
+                <option value="Fall">
+                  Fall
+                </option>
+              </select>
+              {errors.season && (
+                <p className={styles.error}>{errors.season}</p>
+              )}
 
 
               <div className={styles.actImage}>
                 <label>Activity image:     </label>
+
                 <input
-                  className={styles.select2}
+                  className={styles.input}
                   type="text"
                   value={input.image}
                   name="image"
@@ -289,6 +313,8 @@ export function ActivityCreate() {
                   ))}
 
                 </select>
+                <p className={styles.error}>{errors.country}</p>
+
 
               </div>
             </div>
@@ -296,7 +322,10 @@ export function ActivityCreate() {
 
 
           <div className={styles.submit}>
-            <button className={styles.buttonSubmit}  >Create</button>
+            <button className={styles.buttonSubmit}>Create</button>
+
+            {/* <button className={styles.buttonSubmit} type='submit' disabled={Object.entries(errors).length ? true : false}>create Activity</button> */}
+
           </div>
 
         </form>

@@ -5,7 +5,7 @@ import { getCountriesName } from '../../actions'
 import styles from './SearchBar.module.css'
 
 
-export default function SearchBar() {  //{setcurrentpage}
+export default function SearchBar({ setCurrentPage }) {
 
   const dispatch = useDispatch()
 
@@ -17,6 +17,7 @@ export default function SearchBar() {  //{setcurrentpage}
   function handleInputChange(n) {
     n.preventDefault()
     setName(n.target.value)
+    setCurrentPage(1)
     // dispatch(getCountriesName(name))
 
 

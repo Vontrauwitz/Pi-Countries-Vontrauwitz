@@ -1,15 +1,13 @@
-.container {
+/* .container {
   background-color: #dcdada;
   background-image: url('../../assets/img/watercolor-4117017.png');
-  height: 100vh;
+  height: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.4fr 1.6fr 1fr 1fr 1fr 1fr 1.8fr 0.2fr;
+  grid-template-rows: 0.4fr 1.6fr 1fr  1fr 1.8fr 0.2fr;
   gap: 0px 0px;
   grid-template-areas:
     "navBar navBar navBar navBar navBar navBar"
-    "content content content content content content"
-    "content content content content content content"
     "content content content content content content"
     "content content content content content content"
     "content content content content content content"
@@ -19,6 +17,104 @@
 
 .navBar {
   background-color: aqua;
+  grid-area: navBar;
+  
+
+.footer {
+  background-color: aqua;
+  grid-area: footer;
+}
+
+
+
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "image image details details"
+    "image image details details"
+    "activities activities activities activities";
+  grid-area: content;
+}
+
+.image {
+  background-color: red;
+  grid-area: image;
+  
+
+}
+
+.details {
+  grid-area: details;
+  background-color: blue;
+}
+
+.activities {
+  background-color: coral;
+  grid-area: activities;
+} */
+
+
+
+
+
+
+
+
+
+/* .principal {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+ 
+  background-size: cover;
+  position: relative;
+}
+
+.left {
+  display: flex;
+  place-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.right {
+  display: flex;
+  place-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+
+
+.flag {
+  width: 500px;
+}
+
+
+*/
+
+.container {
+  background-color: #dcdada;
+  background-image: url('../../assets/img/watercolor-4117017.png');
+  max-height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.4fr auto auto auto 0.2fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "navBar navBar navBar navBar navBar navBar navBar navBar"
+    "content content content content content content content content"
+    "content content content content content content content content"
+    "content content content content content content content content"
+    "footer footer footer footer footer footer footer footer";
+}
+
+.navBar {
   grid-area: navBar;
   display: flex;
   flex-wrap: wrap;
@@ -62,93 +158,59 @@ button:active {
 }
 
 .footer {
-  background-color: aqua;
   grid-area: footer;
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-
-
-
 .content {
+  height: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto;
   gap: 0px 0px;
+  grid-auto-flow: row;
   grid-template-areas:
-    "image image details details"
-    "image image details details"
-    "activities activities activities activities";
+    "image image image details details details"
+    "image image image details details details"
+    "activities activities activities activities activities activities"
+    ". . . . . .";
   grid-area: content;
 }
 
 .image {
-  background-color: red;
   grid-area: image;
   width: 400px;
-  /* height: 332px; */
+  height: 332px;
   border-radius: 20px;
   margin-left: 5px;
-
+  display: grid;
+  justify-content: center;
+  align-items: center;
 }
 
 .details {
   grid-area: details;
-  background-color: blue;
 }
 
 .activities {
-  background-color: coral;
   grid-area: activities;
-}
-
-
-
-
-
-
-
-
-
-/* .principal {
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
- 
-  background-size: cover;
-  position: relative;
-}
-
-.left {
   display: flex;
-  place-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-.right {
-  display: flex;
-  place-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
-
-
-.flag {
-  width: 500px;
+  flex-wrap: wrap;
 }
 
 .carta {
   background-color: #f0e9e9;
   width: auto;
-  border: solid black 1px;
+  border: solid grey 1px;
   margin: 5px;
   padding: 10px;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
+  border-radius: 30px;
+  background: #e0e0e0;
+  box-shadow: 15px 15px 30px #bebebe,
+    -15px -15px 30px #ffffff;
 
 }
 
@@ -159,4 +221,34 @@ button:active {
   width: auto;
 
 }
-*/
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "data1 data1 data2 data2"
+    "data1 data1 data2 data2";
+  grid-area: details;
+}
+
+.data1 {
+  grid-area: data1;
+  /* background-color: blue; */
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.data2 {
+  grid-area: data2;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.activities {
+  grid-area: activities;
+  margin-top: 30px;
+}

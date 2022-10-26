@@ -2,7 +2,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getCountries, getActivity, filterCountryByActivity, orderByName, orderByPop, orderContinents, orderByNumbers } from '../../actions/index.js';  //? me importo las ACTIONS
+import { getCountries, getActivity, filterCountryByActivity, orderBy, orderContinents, orderByNumbers, handleBillion } from '../../actions/index.js';  //? me importo las ACTIONS
 import { Link } from 'react-router-dom';
 import Card from './../Card/Card';
 import styles from './Home.module.css'
@@ -85,63 +85,57 @@ export default function Home() {
 
 
   const [orden, setOrden] = useState('')
-
-
-  const [ordenPop, setOrdenPop] = useState('')
-
   const [filtros, setFiltros] = useState({});
-
-
 
   //!=============================================================================
 
   function handleActivity(n) {
     setFiltros({ ...filtros, activity: n.target.value }) //   {{}}
-  }//[activity: skii]
-
+    //[activity: skii]
+    n.target.value = 'default'
+  }
   //!=============================================================================
+
   function handleFilter(e) {
     setFiltros({ ...filtros, continent: e.target.value })
     /*[activity: skii
        continment: america    
     ] */
+    e.target.value = 'default'
 
   }
 
   //!===========================================================================
-  function handleFilters(e) {
+  async function handleFilters(e) {
     e.preventDefault()
-    dispatch(getCountries(e))
+    await dispatch(getCountries())
 
 
     dispatch(filterCountryByActivity(filtros.activity));
+
     dispatch(orderContinents(filtros.continent))
     setCurrentPage(1)
+    e.target.value = 'default'
+
+
+
+
 
   }
-
 
 
   //!============================================================================
   function handleSort(n) {
     n.preventDefault();
-    dispatch(orderByName(n.target.value))
+    dispatch(orderBy(n.target.value))
     setCurrentPage(1);
     setOrden(`Ordered ${n.target.value}`)
+    n.target.value = 'default'
   };
   //*=============================================================================
-  function handleSortPop(e) {
-    e.preventDefault();
-    dispatch(orderByPop(e.target.value))
-    setCurrentPage(1);
-    setOrdenPop(`Ordered ${e.target.value}`)
-  };
-
-  function handleBillion() {
-    dispatch(orderByNumbers())
-  }
 
 
+  // selected = "selected"
 
   return (
 
@@ -167,24 +161,26 @@ export default function Home() {
 
       <div className={styles.filters}>
         {
+          <form>
+            <select onChange={n => handleFilter(n)}>
+              <option value='default'>Filter by Continent</option>
+              <option value='All'>🗺️ All Continents</option>
+              <option value='Africa'>🌍 Africa</option>
+              <option value='Americas'>🌎 Americas</option>
+              <option value='Antarctic'>🐧 Antarctic</option>
+              <option value='Asia'>🌏 Asia</option>
+              <option value='Europe'>🌍 Europe</option>
+              <option value='Oceania'>🌏 Oceania</option>
 
-          <select onChange={n => handleFilter(n)}>
-            <option selected="selected">Filter by Continent</option>
-            <option value='All'>🗺️ All Continents</option>
-            <option value='Africa'>🌍 Africa</option>
-            <option value='Americas'>🌎 Americas</option>
-            <option value='Antarctic'>🐧 Antarctic</option>
-            <option value='Asia'>🌏 Asia</option>
-            <option value='Europe'>🌍 Europe</option>
-            <option value='Oceania'>🌏 Oceania</option>
-          </select>
+            </select>
+
+          </form>
         }
-
 
         {
           activitiesSelector.length > 0 ?
             <select className={styles.bar} onChange={(e) => handleActivity(e)}>
-              <option value="DEFAULT" >Filter by Activities</option>
+              <option value="default">Filter by Activities</option>
               <option value='All'>All</option>
               {activitiesSelector.map((el) =>
                 <option key={el.id} value={el.name}>
@@ -193,41 +189,30 @@ export default function Home() {
               )}
             </select>
             :
-            <select defaultValue={'DEFAULT'} className={styles.bar}><option value="DEFAULT" disabled>No activities found</option></select>
+            <select defaultValue={'default'} className={styles.bar}><option value="default" disabled>No activities found</option></select>
         }
 
-
-        <button onClick={handleFilters}>send filters</button>
-
-        {/* {
-          activitiesSelector.length > 0 ?
-            <select defaultValue={'DEFAULT'} className={styles.bar} onChange={(e) => handleActivity(e)}>
-              <option value="DEFAULT" disabled>Filter by Activities</option>
-              <option value='All'>All</option>
-              {activitiesSelector.map((el) =>
-                <option key={el.id} value={el.name}>
-                  {el.name}
-                </option>
-              )}
-            </select>
-            :
-            <select defaultValue={'DEFAULT'} className={styles.bar}><option value="DEFAULT" disabled>No activities found</option></select>
-        } */}
+        <button className={styles.buttonTitulo} onClick={handleFilters}>send filters</button>
 
 
 
-        <select onChange={n => handleSort(n)}>
-          <option>Order by Name</option>
-          <option value='asc'>A ▶️ Z</option>
-          <option value='desc'>Z ▶️ A </option>
-        </select>
-        <select onChange={e => handleSortPop(e)}>
-          <option>Order by Population</option>
-          <option value='ascP'>🧍‍♂️- 👨🏽‍👩🏽‍👧🏽‍👦🏽</option>
-          <option value='descP'> 👨🏽‍👩🏽‍👧🏽‍👦🏽 - 🧍‍♂️</option>
+
+
+        <select className={styles.select} onChange={n => handleSort(n)}>
+
+          <optgroup label='alphabetically'>
+            <option value="default">Order by Name</option>
+            <option value='asc'>A ▶️ Z</option>
+            <option value='desc'>Z ▶️ A </option>
+          </optgroup>
+          <optgroup label='population'>
+            <option>Order by Population</option>
+            <option value='ascP'>🧍‍♂️- 👨🏽‍👩🏽‍👧🏽‍👦🏽</option>
+            <option value='descP'> 👨🏽‍👩🏽‍👧🏽‍👦🏽 - 🧍‍♂️</option>
+          </optgroup>
         </select>
 
-        <button onclick={() => handleBillion()}>filtro</button>
+
 
       </div>
 
@@ -268,7 +253,7 @@ export default function Home() {
 
       {/* //?  footer */}
 
-      <div className={styles.footer}>Aqui va un footer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+      <div className={styles.footer}>PI-Countries SoyHenry Vontrauwitz 2022</div>
 
     </div>
   )

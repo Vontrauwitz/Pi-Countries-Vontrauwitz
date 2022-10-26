@@ -2,7 +2,9 @@ const initialState = {
 
   countries: [],
   allCountries: [],
+  filtered: [],
   activities: [],
+  name: [],
   detail: [],
   delete: "",
 
@@ -16,7 +18,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,  // primero el estado
         countries: action.payload,//segundo el payload de actions, primero es un arreglo vacio y depsues mandame todo de actions
-        allCountries: action.payload //estado secundario, misma info del primero
+        allCountries: action.payload, //estado secundario, misma info del primero
+        filtered: action.payload,
       };
     //? Aqui tengo la logica de traer los countries de ACTIONS al REDUCER, ahora vamos a HOME
 
@@ -25,10 +28,12 @@ function rootReducer(state = initialState, action) {
     case 'GET_ACTIVITY':
       return {
         ...state,
-        activities: action.payload
+        activities: action.payload,
+
       };
 
     //!===========================================================================
+
 
     case 'FILTER_COUNTRY_BY_ACTIVITY':
       let filterAct;
@@ -41,9 +46,9 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: filterAct
       }
-    //!===========================================================================
 
-    case 'ORDER_CONTINENTS':  //TODO
+
+    case 'ORDER_CONTINENTS':
       const allContinents = state.countries
       const filterCon = action.payload === 'All'
         ? allContinents : allContinents.filter(el => el.continent === action.payload)
@@ -51,64 +56,59 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: filterCon
       }
-
-    //!===========================================================================
-
     //!===========================================================================
     //? ORDENAMIENTOS
-    case "ORDER_BY_NAME":
-      let sortedArr =
-        action.payload === "asc"
-          ? state.countries.sort(function (a, b) {
-            if (a.name.toLowerCase() > b.name.toLowerCase()) {
-              return 1;
-            }
-            if (b.name.toLowerCase() > a.name.toLowerCase()) {
-              return -1;
-            }
-            return 0;
+    case "ORDER_BY":
+      if (action.payload === "asc") {
+        return {
+          ...state,
+          countries: [...state.countries].sort(function (a, b) {
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            if (b.name.toLowerCase() > a.name.toLowerCase()) return -1;
+            return 0
           })
-          : state.countries.sort(function (a, b) {
-            if (a.name.toLowerCase() > b.name.toLowerCase()) {
-              return -1;
-            }
-            if (b.name.toLowerCase() > a.name.toLowerCase()) {
-              return 1;
-            }
-            return 0;
-          });
-      return {
-        ...state,
-        countries: sortedArr,
-      };
+        }
+      }
 
-    //*===========================================================================
-
-    case "ORDER_BY_POP": //TODO JUNTAR A HUEVO  A,B,C 10,20,5 ORDENAMIENTOS EXCLUYENTES
-      let sortedArrPop =
-        action.payload === "ascP"
-          ? state.countries.sort(function (a, b) {
-            if (a.population > b.population) {
-              return 1;
-            }
-            if (b.population > a.population) {
-              return -1;
-            }
-            return 0;
+      if (action.payload === "desc") {
+        return {
+          ...state,
+          countries: [...state.countries].sort(function (a, b) {
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+            if (b.name.toLowerCase() > a.name.toLowerCase()) return 1;
+            return 0
           })
-          : state.countries.sort(function (a, b) {
-            if (a.population > b.population) {
-              return -1;
-            }
-            if (b.population > a.population) {
-              return 1;
-            }
-            return 0;
-          });
-      return {
-        ...state,
-        countries: sortedArrPop,
+        }
+      }
+      if (action.payload === "ascP") {
+        return {
+          ...state,
+          countries: [...state.countries].sort(function (a, b) {
+            if (a.population > b.population) return 1;
+            if (b.population > a.population) return -1;
+            return 0
+          })
+        }
+      }
+
+      if (action.payload === "descP") {
+        return {
+          ...state,
+          countries: [...state.countries].sort(function (a, b) {
+            if (a.population > b.population) return -1;
+            if (b.population > a.population) return 1;
+            return 0
+          })
+        }
+      }
+      else {
+        return {
+          ...state,
+          countries: state.filtered,
+        }
       };
+    // A,B,C 10,20,5 ORDENAMIENTOS EXCLUYENTES
+
     //!===========================================================================
     case 'GET_COUNTRIES_NAME':
       return {
@@ -134,22 +134,14 @@ function rootReducer(state = initialState, action) {
       }
     //!===========================================================================
     case "DELETE_ACTIVITY_NAME":
+
       return {
         ...state,
         activities: action.payload
       };
 
 
-    case "ORDER_BY_NUMBERS":
-      const filterBillion = (action.payload <= 1000000000)
-      filterBillion.filter(el => el.population === action.payload)
-      return {
-        ...state,
-        countries: filterBillion
-      }
 
-
-    //1,000,000,000  ++
 
 
     default:

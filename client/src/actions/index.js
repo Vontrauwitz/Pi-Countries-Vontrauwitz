@@ -24,7 +24,7 @@ export function getCountries() {
 export function getActivity(payload) {
   return async function (dispatch) {
     try {
-      var info = await axios.get("http://localhost:3001/activity")
+      var info = await axios.get("http://localhost:3001/activities")
       console.log(info);
       return dispatch({
         type: "GET_ACTIVITY",
@@ -43,14 +43,14 @@ export function getActivity(payload) {
 export function getCountriesName(name) {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`http://localhost:3001/countries?name=${name}`);
+      let json = await axios.get(`http://localhost:3001/countries?name=${name}`);
       console.log(json.data);
       return dispatch({
         type: "GET_COUNTRIES_NAME",
         payload: json.data
       });
     } catch (error) {
-      // alert("No countries found");
+      alert("No countries found");
     }
   };
 }
@@ -60,14 +60,16 @@ export function postActivity(payload) {
   return async function (dispatch) {
     try {
       const response = await axios.post(
-        "http://localhost:3001/activity", payload
+        "http://localhost:3001/activities", payload
       );
-
-      return response;
+      return dispatch({
+        type: "POST_ACTIVITY",
+        payload: response.data,
+      })
 
     } catch (error) {
       console.log(error);
-      alert("The following ACTIVITY alread exist")
+      alert(error)
     }
   };
 }
@@ -81,6 +83,16 @@ export function filterCountryByActivity(value) {
 }
 //!=====================================================================
 
+export function orderBy(payload) {
+  console.log(payload);
+  return {
+    type: 'ORDER_BY',
+    payload
+  }
+}
+
+//!=====================================================================
+
 export function filterCountryByContinents(payload) {
 
   return {
@@ -91,23 +103,6 @@ export function filterCountryByContinents(payload) {
 
 //!=====================================================================
 
-export function orderByName(payload) {
-  console.log(payload);
-  return {
-    type: 'ORDER_BY_NAME',
-    payload
-  }
-}
-
-export function orderByPop(payload) {
-  console.log(payload);
-  return {
-    type: 'ORDER_BY_POP',
-    payload
-  }
-}
-
-//!=====================================================================
 
 export function orderContinents(payload) {
   return {

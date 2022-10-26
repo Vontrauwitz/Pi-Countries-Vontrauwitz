@@ -27,7 +27,13 @@ export default function Detail(props) {
         <img className={styles.logo} src={helloWorld} alt='holaMundo' />
 
         <Link to='/home'>
-          <button className={styles.buttonBack}>Go Back</button>
+          <button className={styles.buttonBack}>Home</button>
+        </Link>
+        <Link to='/Activity'>
+          <button className={styles.buttonBack}>Create Activity</button>
+        </Link>
+        <Link to='/CardActivityRender'>
+          <button className={styles.buttonBack}>View Activity</button>
         </Link>
 
       </div>
@@ -43,28 +49,39 @@ export default function Detail(props) {
               <br />
             </div>
             <div className={styles.details}>
-              <h1>{myActivity.name}</h1>
-              <br />
-              <br />
-              <p>CCA3 Code: {myActivity.id}</p>
-              <br />
-              <p>Capital: {myActivity.capital}</p>
-              <br />
-              <p>Sub-Region: {myActivity.subregion}</p>
-              <br />
-              <p>km2: {myActivity.area.toLocaleString('en-US')} </p>
-              <br />
-              <p> Population: {myActivity.population.toLocaleString('en-US')} </p>
-              <br />
-              <p>
-                <img src={logo1} alt='icon1' />
-                <a href={'' + myActivity.maps} target="_blank" rel='noreferrer'>GoogleMaps </a>
-              </p>
-              <br />
-              <p>
-                <img src={logo2} alt='icon2' />
-                <a href={'' + myActivity.map} target="_blank" rel='noreferrer'> OpenStreetMaps</a>
-              </p>
+
+
+
+              <div className={styles.data1}>
+                <h1>{myActivity.name}</h1>
+                <br />
+                <br />
+                <p>CCA3 Code: {myActivity.id}</p>
+                <br />
+                <p>Capital: {myActivity.capital}</p>
+                <br />
+                <p>Sub-Region: {myActivity.subregion}</p>
+                <br />
+              </div>
+
+              <div className={styles.data2}>
+                <p>km2: {myActivity.area.toLocaleString('en-US')} </p>
+                <br />
+                <p> Population: {myActivity.population.toLocaleString('en-US')} </p>
+                <br />
+                <p>
+                  <img src={logo1} alt='icon1' />
+                  <a href={'' + myActivity.maps} target="_blank" rel='noreferrer'>GoogleMaps </a>
+                </p>
+                <br />
+                <p>
+                  <img src={logo2} alt='icon2' />
+                  <a href={'' + myActivity.map} target="_blank" rel='noreferrer'> OpenStreetMaps</a>
+                </p>
+              </div>
+
+
+
               <br />
             </div>
 
@@ -93,7 +110,7 @@ export default function Detail(props) {
 
           </div> : <p>Loading......</p>
       }
-      <div className={styles.footer}>Aqui va un footer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</div>
+      <div className={styles.footer}>PI-Countries SoyHenry Vontrauwitz 2022</div>
 
 
     </div>

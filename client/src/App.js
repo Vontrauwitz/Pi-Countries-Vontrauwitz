@@ -7,6 +7,7 @@ import CardActivityRender from './components/CardActivity/CardActivityRender';
 import Detail from './components/Detail/Detail';
 import PruebaCss from './components/PruebaCss/pruebaCss.jsx'; //! borrar son pruebas
 import pruebaCss2 from './components/PruebaCss/PruebaCss2.jsx'; //! borrar son pruebas
+import About from './components/About/About.jsx';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/Activity" component={ActivityCreate} />
           <Route path="/home/:id" component={Detail} />
           <Route path="/CardActivityRender" component={CardActivityRender} />
+          <Route path="/About" component={About} />
           <Route exact path="/PruebaCss" component={PruebaCss} />
           <Route exact path="/PruebaCss2" component={pruebaCss2} />
         </Switch>

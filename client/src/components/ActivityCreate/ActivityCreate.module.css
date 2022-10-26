@@ -2,7 +2,7 @@
   font-family: sans-serif;
   background-image: url(../../assets/img/watercolor-4117017.png);
   background-color: #bebebe;
-  height: 100vh;
+  height: auto;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr 1fr;
   grid-template-rows: 0.4fr 1.6fr 1fr 0.9fr 1.7fr 0.4fr;
@@ -43,6 +43,7 @@
 .countries {
   grid-area: countries;
   /* background-color: brown */
+  margin-top: 20px;
   padding-top: 10px;
 }
 
@@ -50,76 +51,13 @@
   grid-area: titleImage;
   /*background-color: blueviolet;
   */
-  width: 512px;
-  height: 332px;
+  width: 400px;
+  height: 300px;
   border-radius: 20px;
-  margin-left: 10px;
+  margin-left: 120px;
+  margin-top: 20px;
 }
 
-.slider {
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-}
-
-.slider ul {
-  padding: 0;
-  display: flex;
-  /*width: 2000em;
-  */
-  width: 400%;
-  animation: cambio 8s infinite;
-  -webkit-animation: cambio 8s infinite;
-}
-
-@keyframes cambio {
-  0% {
-    margin-left: 0%;
-  }
-
-  20% {
-    margin-left: 0%;
-  }
-
-  25% {
-    margin-left: -100%;
-  }
-
-  45% {
-    margin-left: -100%;
-  }
-
-  50% {
-    margin-left: -200%;
-  }
-
-  70% {
-    margin-left: -200%;
-  }
-
-  75% {
-    margin-left: -300%;
-  }
-
-  95% {
-    margin-left: -300%;
-  }
-
-  100% {
-    margin-left: 0%;
-  }
-}
-
-.slider li {
-  list-style: none;
-  width: 100%;
-}
-
-.slider img {
-  width: 100%;
-  height: 100vh;
-}
 
 .form {
   grid-area: formulario;
@@ -214,7 +152,7 @@
 
 .buttonSubmit {
 
-  padding: 1.3em 3em;
+  padding: 10px;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2.5px;
@@ -311,5 +249,46 @@ button:active {
   font-size: 15px;
   cursor: pointer;
   margin-left: 20px;
+
+}
+
+select {
+
+  padding: 7px;
+
+  border: 1px solid #E8EAED;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 1px 3px -2px #9098A9;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px;
+  transition: all 150ms ease;
+  color: #223254;
+}
+
+option {
+  color: #223254;
+
+
+}
+
+.input {
+  border: none;
+  margin-left: 5px;
+  padding: 10px;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #c5c5c5,
+    -10px -10px 60px #b4afaf;
+  transition: 0.3s;
+}
+
+.input:focus {
+  outline-color: #e8e8e8;
+  background: #e8e8e8;
+  box-shadow: inset 20px 20px 60px #c5c5c5,
+    inset -20px -20px 60px #ffffff;
+  transition: 0.3s;
 
 }
